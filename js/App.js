@@ -11,24 +11,10 @@ class App {
         const moviesData = await this.moviesApi.get()
         const externalMoviesData = await this.externalMoviesApi.get()
 
-        const Movies = moviesData.map(movie => new MoviesFactory(movie, 'newApi'))
-        const ExternalMovies = externalMoviesData.map(movie => new MoviesFactory(movie, 'externalApi'))
-
-        const FullMovies = Movies.concat(ExternalMovies)
-
-
-        const Form = new FormModal()
-        Form.render()
-
-        const Filter = new FilterForm(FullMovies)
-        Filter.render()
-
-        FullMovies.forEach(movie => {
-                const Template = new MovieCard(movie)
-                this.$moviesWrapper.appendChild(
-                    Template.createMovieCard()
-                )
-        })
+        movies.forEach(movie => {
+            const Template = new MovieCard(movie)
+            this.$moviesWrapper.appendChild(Template.createMovieCard())        
+        })    
     }
 }
 
